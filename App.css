@@ -1,0 +1,11 @@
+/* 
+ * App.css — global root reset only.
+ * All design tokens, utilities, and component styles live in index.css.
+ */
+
+#root {
+  /* Let the Tailwind container utility own all width/padding. */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

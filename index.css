@@ -1,0 +1,303 @@
+/* ─────────────────────────────────────────────────────────────────
+   VALARMATHI COMPUTERS — Global Theme
+   Single source of truth for the entire site's design system.
+   ──────────────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── 1. Design Tokens ──────────────────────────────────────────── */
+@layer base {
+  :root {
+    /* Backgrounds */
+    --background: 0 0% 100%;
+    --foreground: 220 20% 10%;
+
+    /* Cards / Popovers */
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 10%;
+
+    /* Brand — primary red */
+    --primary: 0 80% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary surfaces */
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 20% 10%;
+
+    /* Muted text / surfaces */
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 10% 46%;
+
+    /* Accent (light red tint) */
+    --accent: 0 80% 96%;
+    --accent-foreground: 0 80% 40%;
+
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Borders & inputs */
+    --border: 220 14% 90%;
+    --input: 220 14% 90%;
+    --ring: 0 80% 50%;
+
+    /* Border radius base */
+    --radius: 0.625rem;
+
+    /* Admin sidebar */
+    --sidebar-background: 220 20% 10%;
+    --sidebar-foreground: 220 14% 90%;
+    --sidebar-primary: 0 80% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 20% 16%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 220 20% 18%;
+    --sidebar-ring: 0 80% 50%;
+    --sidebar-muted: 220 10% 40%;
+
+    /* Gradient & shadow tokens */
+    --hero-gradient: linear-gradient(135deg, hsl(0 80% 50%) 0%, hsl(350 80% 40%) 100%);
+    --card-shadow:       0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+    --card-shadow-lg:    0 10px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.04);
+    --card-shadow-hover: 0 20px 40px -10px hsl(0 80% 50% / 0.15);
+
+    /* ── Typography scale ──────────────────────────────────────── */
+    --font-sans:    'Plus Jakarta Sans', Inter, system-ui, sans-serif;
+    --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+    /* Section vertical rhythm  */
+    --section-py:   4rem;    /* py-16 */
+    --section-mb:   2.5rem;  /* mb-10 (header bottom margin) */
+  }
+}
+
+/* ── 2. Base element resets ────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    @apply border-border box-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.625;
+  }
+
+  /* Heading defaults — display font, tight tracking */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply font-extrabold tracking-tight text-foreground leading-tight;
+  }
+
+  /* Body text defaults */
+  p { @apply leading-relaxed; }
+
+  /* Anchor defaults */
+  a { @apply transition-colors duration-200; }
+
+  /* Smooth scroll target offset for sticky navbar */
+  [id] { scroll-margin-top: 4.5rem; }
+}
+
+/* ── 3. Utility classes ────────────────────────────────────────── */
+@layer utilities {
+  /* Gradient helpers */
+  .hero-gradient {
+    background: var(--hero-gradient);
+  }
+  .text-gradient {
+    background: var(--hero-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Shadow scale */
+  .card-shadow       { box-shadow: var(--card-shadow); }
+  .card-shadow-lg    { box-shadow: var(--card-shadow-lg); }
+  .card-shadow-hover { box-shadow: var(--card-shadow-hover); }
+
+  /* Vertical section rhythm helper */
+  .section-py { padding-top: var(--section-py); padding-bottom: var(--section-py); }
+}
+
+/* ── 4. Reusable component classes ─────────────────────────────── */
+@layer components {
+
+  /* ── 4a. Layout ── */
+
+  /* Standard page section */
+  .site-section {
+    @apply py-16;
+  }
+  /* Alternating tinted surface */
+  .site-section-tinted {
+    @apply py-16 bg-secondary/40;
+  }
+
+  /* Max-width page container (mirrors Tailwind container config) */
+  .site-container {
+    @apply container;
+  }
+
+  /* Section header block (centered label + heading + optional sub) */
+  .section-header {
+    @apply mx-auto mb-10 max-w-2xl text-center;
+  }
+  .section-label {
+    @apply mb-3 inline-flex items-center gap-1.5 rounded-full bg-accent px-4 py-1.5
+           text-sm font-semibold text-accent-foreground;
+  }
+  .section-title {
+    @apply font-display text-3xl font-extrabold tracking-tight text-foreground md:text-4xl;
+  }
+  .section-sub {
+    @apply mt-3 text-sm leading-relaxed text-muted-foreground;
+  }
+
+  /* ── 4b. Cards ── */
+
+  .card-base {
+    @apply rounded-xl border bg-card card-shadow
+           transition-all duration-300
+           hover:card-shadow-hover hover:-translate-y-1;
+  }
+  .card-base-p {
+    @apply card-base p-6;
+  }
+
+  /* ── 4c. Buttons ── */
+
+  /* Primary — brand red gradient */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2
+           rounded-xl hero-gradient px-5 py-2.5
+           text-sm font-bold text-white
+           shadow-md shadow-primary/20
+           transition-all duration-200
+           hover:opacity-90 hover:-translate-y-px hover:shadow-lg
+           active:scale-[0.98]
+           disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+  .btn-primary-lg {
+    @apply btn-primary px-7 py-3 text-base;
+  }
+
+  /* Outline — bordered, no fill */
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2
+           rounded-xl border border-border bg-transparent px-5 py-2.5
+           text-sm font-semibold text-foreground
+           transition-all duration-200
+           hover:bg-secondary hover:-translate-y-px
+           active:scale-[0.98]
+           disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+  .btn-outline-lg {
+    @apply btn-outline px-7 py-3 text-base;
+  }
+
+  /* Ghost — no border, subtle hover */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2
+           rounded-xl bg-transparent px-4 py-2
+           text-sm font-semibold text-muted-foreground
+           transition-all duration-200
+           hover:bg-secondary hover:text-foreground;
+  }
+
+  /* Icon chip (square icon button) */
+  .icon-chip {
+    @apply flex h-10 w-10 flex-shrink-0 items-center justify-center
+           rounded-xl bg-accent text-primary;
+  }
+  .icon-chip-lg {
+    @apply icon-chip h-12 w-12;
+  }
+
+  /* ── 4d. Badge / pill label ── */
+  .badge-primary {
+    @apply inline-flex items-center gap-1 rounded-full
+           bg-primary/10 px-3 py-0.5
+           text-xs font-semibold text-primary;
+  }
+  .badge-accent {
+    @apply inline-flex items-center gap-1 rounded-full
+           bg-accent px-3 py-0.5
+           text-xs font-semibold text-accent-foreground;
+  }
+  .badge-muted {
+    @apply inline-flex items-center gap-1 rounded-full
+           bg-secondary px-3 py-0.5
+           text-xs font-semibold text-muted-foreground;
+  }
+
+  /* ── 4e. Nav & page chrome ── */
+
+  /* The sticky nav bar */
+  .site-navbar {
+    @apply sticky top-0 z-50 border-b
+           bg-background/95 backdrop-blur
+           supports-[backdrop-filter]:bg-background/80;
+  }
+
+  /* Footer */
+  .site-footer {
+    @apply border-t bg-foreground py-12 text-primary-foreground;
+  }
+
+  /* ── 4f. Typography helpers ── */
+
+  /* Hero heading (used only in HeroSection) */
+  .heading-hero {
+    @apply font-display text-4xl font-extrabold leading-tight
+           tracking-tight text-foreground
+           md:text-5xl lg:text-6xl;
+  }
+
+  /* Page / section heading (h2) */
+  .heading-section {
+    @apply font-display text-3xl font-extrabold tracking-tight
+           text-foreground md:text-4xl;
+  }
+
+  /* Card / sub-section heading (h3) */
+  .heading-card {
+    @apply font-display text-base font-bold text-foreground;
+  }
+
+  /* Body / description text */
+  .body-text {
+    @apply text-sm leading-relaxed text-muted-foreground;
+  }
+  .body-text-base {
+    @apply text-base leading-relaxed text-muted-foreground;
+  }
+
+  /* ── 4g. Form fields ── */
+  .field-input {
+    @apply w-full rounded-xl border border-border bg-background
+           px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground
+           outline-none ring-0
+           transition-all duration-200
+           focus:border-primary focus:ring-2 focus:ring-primary/20
+           hover:border-muted-foreground/40;
+  }
+
+  /* ── 4h. Divider ── */
+  .divider {
+    @apply border-t border-border;
+  }
+}
